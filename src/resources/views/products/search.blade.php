@@ -7,58 +7,53 @@
 @section('title', 'Product Search')
 
 @section('content')
-    <h2>商品一覧</h2>
+<div class="search-contact>
+  <h2>商品検索</h2>
+
+    <form class="search-form" action="{{ route('products.search') }}" method="GET">
+      <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="商品名を入力" class="search-input">
+      <button type="submit" class="search-button">検索</button>
+    </form>
 
     @if ($errors->any())
-        <div style="color:red;">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
+    <div class="error-box">
+      <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+      </ul>
+    </div>
     @endif
 
-    <div class="contact-form__inner">
-    <form action="{{ route('products.search') }}" method="GET">
-        @csrf
+    @if(isset($keyword))
+      <h3>“{{ $keyword }}”の商品一覧</h3>
+    @endif
 
-        <div class="contact-form__group contact-form__name-group">
-            <label class="contact-form__label" for="name">商品名
-          </label>
-          <input class="contact-form__input contact-form__name-input" type="text" name="name" id="name"
-            value="{{ old('name') }}" placeholder="商品名を入力">
-        </div>
-        <div class="contact-form__error-message">
-          @if ($errors->has('first_name'))
-          <p class="contact-form__error-message-first-name">{{$errors->first('first_name')}}</p>
-          @endif
-          @if ($errors->has('last_name'))
-          <p class="contact-form__error-message-last-name">{{$errors->first('last_name')}}</p>
-          @endif
-        </div>
-      </div>
-        <tr class="confirm-form__row">
-          <th class="confirm-form__label">メールアドレス</th>
-          <td class="confirm-form__data">{{ $contacts['email'] }}</td>
-          <input type="hidden" name="email" value="{{ $contacts['email'] }}">
-        </tr>
-
-        <label>商品名</label>
-        <input type="text" name="name" value="{{ old('name') }}">
-
-        <label>値段</label>
-        <input type="number" name="price" value="{{ old('price') }}" min="0" max="100000">
-
-        <label>Grade</label><br>
-        <input type="radio" name="grade" value="elementary"> Elementary
-        <input type="radio" name="grade" value="middle"> Middle
-        <input type="radio" name="grade" value="high"> High
-
-        <label>Product Description (max 120 characters)</label>
-        <textarea name="description" maxlength="120">{{ old('description') }}</textarea>
-
-        <button type="submit">Search</button>
-        <a href="{{ route('products.index') }}">Back</a>
+    <form method="GET" action="{{ route('products.search') }}" class="sort-form">
+      <input type="hidden" name="keyword" value="{{ request('keyword') }}">
+        <select name="sort" onchange="this.form.submit()" class="sort-select">
+          <option value="">並び替え</option>
+          <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>価格が安い順</option>
+          <option value="desc" {{ request('sort') == 'desc' ? 'selected' : '' }}>価格が高い順</option>
+        </select>
     </form>
+
+    <div class="product-grid">
+      @forelse ($products as $product)
+        <div class="product-card">
+          <img src="{{ asset('storage/images/fruits-img/' . $product->image) }}" alt="{{ $product->name }}" class="product-image">
+            <div class="product-info">
+              <p class="product-name">{{ $product->name }}</p>
+              <p class="product-price">¥{{ number_format($product->price) }}</p>
+            </div>
+        </div>
+      @empty
+        <p>該当する商品が見つかりませんでした。</p>
+      @endforelse
+    </div>
+
+    <div class="pagination">
+      {{ $products->appends(request()->query())->links() }}
+    </div>
+</div>
 @endsection

@@ -2,18 +2,14 @@
 
 @section('title', 'Product Registration')
 
-@section('content')
-    <h2>商品登録</h2>
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/register.css') }}">
+@endsection
 
-    @if ($errors->any())
-        <div style="color:red;">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+
+@section('content')
+<div class="container">
+    <h2>商品登録</h2>
 
     <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -35,30 +31,25 @@
             <label class="contact-form__label" for="price">値段
                 <span class="contact-form__required">必須</span>
             </label>
-            <input class="contact-form__input" type="price" name="price" id="price" value="{{ old('price') }}" placeholder="値段を入力してください">
+            <input class="contact-form__input" type="number" name="price" id="price" value="{{ old('price') }}" placeholder="値段を入力してください">
             <p class="contact-form__error-message">
                 @error('price')
                 {{ $message }}
                 @enderror
             </p>
         </div>
-
-        <form action="/store" method="POST" enctype="multipart/form-data">
-        @csrf
         <div class="contact-form__group">
-            <label class="contact-form__label" for="image">商品画像      <span class="contact-form__required">必須</span>
-                <input type="file" name="image">
-                @if (!empty($filename))
-                <img src="{{ asset('storage/images/fruits-img/' . $filename ??'') }}" alt="商品画像">
-                @endif
-            </label>
+            <label class="contact-form__label">商品画像</label>
+            <span class="contact-form__required">必須</span>
+
+            <input type="file" name="image" id="image" accept=".png,.jpeg,">
+            <img id="preview" src="" alt="画像プレビュー" style="max-width: 300px; margin-top: 10px; display: none;">
             <p class="contact-form__error-message">
                 @error('image')
                 {{ $message }}
                 @enderror
             </p>
         </div>
-
         <div class="contact-form__group">
             <label class="contact-form__label">季節
                 <span class="contact-form__required">必須</span>
@@ -105,3 +96,21 @@
         </div>
     </form>
 @endsection
+
+@section('scripts')
+<script>
+document.getElementById('image').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const preview = document.getElementById('preview');
+        preview.src = e.target.result;
+        preview.style.display = 'block'; 
+    };
+    reader.readAsDataURL(file);
+});
+</script>
+@endsection
+

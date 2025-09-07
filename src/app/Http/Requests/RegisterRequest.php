@@ -25,28 +25,35 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'price' => 'required|integer|min:0|max:1000000',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:2048',
-            'donation' => 'required|in:none,yes,no,cow',
-            'description' => 'required|string|max:120',
+            'price' => 'required|numeric|min:0|max:10000',
+            'image' => 'required|mimes:png,jpeg',
+            'season' => 'required|array',
+            'season.*' => 'in:1,2,3,4',
+            'description' => 'required|max:120',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Product name is required.',
-            'price.required' => 'Price is required.',
-            'price.integer' => 'Price must be a number.',
-            'price.min' => 'Price must be at least 0 yen.',
-            'price.max' => 'Price must not exceed 1,000,000 yen.',
-            'image.required' => 'Product image is required.',
-            'image.image' => 'Uploaded file must be an image.',
-            'image.mimes' => 'Image must be a .png, .jpg, or .jpeg file.',
-            'donation.required' => 'Donation selection is required.',
-            'donation.in' => 'Invalid donation option selected.',
-            'description.required' => 'Product description is required.',
-            'description.max' => 'Description must be within 120 characters.',
+            'name.required' => '商品名を入力してください',
+            'name.max' => '商品名は255文字以内で入力してください',
+
+
+            'price.required' => '値段を入力してください',
+            'price.numeric' => '数値で入力してください',
+            'price.max' => '0~10000以内で入力してください。',
+
+            'image.required' => '商品画像を登録してください',
+            'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
+            
+            'season.required' => '季節を選択してください',
+            'season.array' => '季節の選択形式が正しくありません',
+            'season.*.in' => '季節の選択が不正です（春・夏・秋・冬から選んでください）',
+            
+            'description.required' => '商品説明を入力してください',
+            'description.max' => '120文字以内で入力してください',
+
         ];
     }
 

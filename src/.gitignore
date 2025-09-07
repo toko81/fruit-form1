@@ -20,3 +20,6 @@ yarn-error.log
 /.idea
 /.vscode
 docker/mysql/data/
+docker/mysql/data/*
+!docker/mysql/data/.gitignore
+
