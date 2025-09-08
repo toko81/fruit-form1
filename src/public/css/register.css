@@ -47,7 +47,6 @@
     font-size: 15px;
 }
 
-/* ボタンエリア */
 .contact-form__btn-inner {
     display: flex;
     justify-content: space-between;
@@ -64,19 +63,18 @@
 }
 
 .contact-form__return-btn {
-    background-color: #ccc;
+    background-color: wheat;
     color: #333;
 }
 
 .contact-form__register-btn {
-    background-color: #4CAF50;
-    color: white;
+    background-color: orange;
+    color: black;
 }
 
-/* 商品画像プレビュー */
 .contact-form__group img {
     margin-top: 10px;
     max-width: 100%;
     border-radius: 4px;
-    border: 1px solid #ddd;
+    border: 1px solid wheat;
 }

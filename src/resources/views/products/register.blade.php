@@ -31,7 +31,7 @@
             <label class="contact-form__label" for="price">値段
                 <span class="contact-form__required">必須</span>
             </label>
-            <input class="contact-form__input" type="number" name="price" id="price" value="{{ old('price') }}" placeholder="値段を入力してください">
+            <input class="contact-form__input" type="number" name="price" id="price" value="{{ old('price') }}" placeholder="値段を入力">
             <p class="contact-form__error-message">
                 @error('price')
                 {{ $message }}
@@ -54,7 +54,7 @@
             <label class="contact-form__label">季節
                 <span class="contact-form__required">必須</span>
             </label>
-            <lavel class="contact-form__choice">複数選択可</lavel>
+            <label class="contact-form__choice">複数選択可</label>
             <div class="contact-form__season-option">
                 <input type="checkbox" name="season[]" value="1" {{ in_array('1', old('season', [])) ? 'checked' : '' }}>
                 <span class="contact-form__season-text">春</span>

@@ -32,7 +32,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        return view('products.register');
     }
 
     public function store(Request $request)
@@ -41,6 +41,8 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'price' => 'required|integer',
             'image' => 'required|image|max:2048',
+            'season' => 'required|array',
+            'description' => 'required|string|max:120',
         ]);
 
         $path = $request->file('image')->store('products', 'public');

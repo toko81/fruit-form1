@@ -1,0 +1,84 @@
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    color: orange;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background-color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__inner {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: orange;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: color 0.2s ease;
+}
+
+nav ul li a:hover {
+    color: green;
+}
+
+main {
+    flex: 1;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.fruit {
+    margin: 1rem auto;
+    max-width: 960px;
+    padding: 1rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: greenyellow;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: white;
+    color: black;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
