@@ -21,7 +21,6 @@ Route::post('/products', [ProductController::class, 'store'])->name('products.st
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
 Route::get('/register', [ProductController::class, 'create'])->name('products.register.short');
-Route::post('/register', [ProductController::class, 'store'])->name('products.store');
 Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
 Route::post('/products/confirm', [ProductController::class, 'confirm']);
 Route::get('/products/register', [ProductController::class, 'registerForm'])->name('products.registerForm');

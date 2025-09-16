@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
@@ -35,7 +35,7 @@ class ProductController extends Controller
         return view('products.register');
     }
 
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
